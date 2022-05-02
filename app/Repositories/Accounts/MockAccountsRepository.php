@@ -27,6 +27,15 @@ class MockAccountsRepository implements IAccountsRepository {
         array_push($this->accounts, $data);
     }
 
+    public function findByNumber(int|string $number): array
+    {
+        $index = array_search($number, array_column($this->accounts, 'number'));
+        if ($index===false) {
+            return [];
+        }
+        return $this->accounts[$index];
+    }
+
     public function getBalanceByNumber(int|string $number): int
     {
         $index = array_search($number, array_column($this->accounts, 'number'));
