@@ -35,4 +35,8 @@ class MockAccountsRepository implements IAccountsRepository {
         }
         return $this->accounts[$index]['balance'];
     }
+
+    public function reset(): void {
+        $this->accounts = [];
+    }
 }

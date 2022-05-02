@@ -24,5 +24,9 @@ class MockEventsRepository implements IEventsRepository {
         array_push($this->events, $data);
     }
 
+    public function reset(): void {
+        $this->events = [];
+    }
+
     
 }
