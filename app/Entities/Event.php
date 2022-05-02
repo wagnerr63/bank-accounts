@@ -6,7 +6,7 @@ use App\Entities\CoreEntity;
 
 class Event extends CoreEntity {
     
-    public Type $type;
+    public string $type;
     public string|int $origin = "";
     public string|int $destination = "";
     public int $amount = 0;
