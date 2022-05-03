@@ -15,13 +15,15 @@ class EloquentAccountsRepository implements IAccountsRepository {
     }
 
     public function findById(int|string $id): array
-    {
-        return $this->accountModel->where('id', $id)->get()->first()->toArray();
+    {   
+        $account = $this->accountModel->where('id', $id)->get()->first();
+        return $account ? $account->toArray() : [];
     }
 
     public function findByNumber(int|string $number): array
-    {   
-        return $this->accountModel->where('number', $number)->get()->first()->toArray();
+    {      
+        $account = $this->accountModel->where('number', $number)->get()->first();
+        return $account ? $account->toArray() : [];
     }
 
     public function create(array $data): void {
@@ -29,8 +31,9 @@ class EloquentAccountsRepository implements IAccountsRepository {
     }
 
     public function getBalanceByNumber(int|string $number): int
-    {
-        return $this->accountModel->where('number', $number)->get('balance')->first()->toArray();
+    {   
+        $balance = $this->accountModel->where('number', $number)->get('balance')->first();
+        return $balance ? $balance->toArray() : 0;
     }
 
     public function update(array $data): void

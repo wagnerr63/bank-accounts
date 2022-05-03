@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class GetBalanceByNumberController extends Controller
 {
     public function handle(Request $request) {
-        $number = $request->input('id');
+        $number = $request->input('account_id');
 
         try {
             $getAccountByNumber = new GetAccountByNumberUseCase();

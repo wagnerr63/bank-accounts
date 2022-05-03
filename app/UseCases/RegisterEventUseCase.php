@@ -61,7 +61,11 @@ class RegisterEventUseCase {
 
                     $this->eventsRepository->create((array) $event);
 
-                    // TODO - return the updated state of account
+                    return ['destination' => [
+                        'id' => $data->destination,
+                        'balance' => $account->balance
+                        ]
+                    ];
                 } else {
                     $event = new Event();
                     $event->type = $data->type;

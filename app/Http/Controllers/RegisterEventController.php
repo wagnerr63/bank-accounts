@@ -30,7 +30,7 @@ class RegisterEventController extends Controller
         try {
 
             $response = $registerEventUseCase->execute($data);
-            return $response;
+            return response($response, 201);
 
         } catch (\Exception $e) {
             return response($e->getMessage(), 400);

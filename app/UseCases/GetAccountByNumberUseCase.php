@@ -2,6 +2,7 @@
 
 namespace App\Usecases;
 
+use App\Repositories\Accounts\EloquentAccountsRepository;
 use App\Repositories\Accounts\IAccountsRepository;
 use App\Repositories\Accounts\MockAccountsRepository;
 use Exception;
@@ -11,7 +12,7 @@ class GetAccountByNumberUseCase {
 
     public function __construct(IAccountsRepository $accountsRepository = null)
     {
-        $this->accountsRepository = $accountsRepository ? $accountsRepository : MockAccountsRepository::getInstance();
+        $this->accountsRepository = $accountsRepository ? $accountsRepository : new EloquentAccountsRepository;
     }
 
     public function execute(int|string $number): array {

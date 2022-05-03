@@ -31,7 +31,7 @@ POST /event {"type":"deposit", "destination":"100", "amount":10}
 
 
 --
-# Get balance for existing account
+# Get balance for existing account - DONE
 
 GET /balance?account_id=100
 
