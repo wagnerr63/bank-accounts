@@ -3,12 +3,22 @@
 namespace App\Repositories\Events;
 
 class MockEventsRepository implements IEventsRepository {
-    private array $events;
+    public array $events;
+    private static $instance;
+    
 
     public function __construct()
     {
         $this->events = [];
     }
+
+    static function getInstance(): self {
+        if(self::$instance === null){
+            self::$instance = new self;
+        }
+        return self::$instance;
+    }
+
 
     public function findById(int|string $id): array
     {

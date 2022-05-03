@@ -5,12 +5,20 @@ namespace App\Repositories\Accounts;
 use App\Repositories\Accounts\IAccountsRepository;
 
 class MockAccountsRepository implements IAccountsRepository {
-
-    private array $accounts;
+    private static $instance;
+    public array $accounts;
+    
 
     public function __construct()
     {
         $this->accounts = [];
+    }
+
+    static function getInstance(): self {
+        if(self::$instance === null){
+            self::$instance = new self;
+        }
+        return self::$instance;
     }
 
     public function findById(int|string $id): array
