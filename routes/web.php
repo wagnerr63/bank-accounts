@@ -1,10 +1,7 @@
 <?php
 
-use App\Entities\Type;
-use App\Repositories\Accounts\MockAccountsRepository;
-use App\Repositories\Events\MockEventsRepository;
-use App\Usecases\RegisterEventUseCase;
-use App\Usecases\RegisterEventUseCaseDTO;
+use App\Entities\Account;
+use App\Repositories\Accounts\EloquentAccountsRepository;
 
 /** @var \Laravel\Lumen\Routing\Router $router */
 
@@ -20,23 +17,7 @@ use App\Usecases\RegisterEventUseCaseDTO;
 */
 
 $router->get('/', function () use ($router) {
-    $accountsRepository = MockAccountsRepository::getInstance();
-    $eventsRepository = MockEventsRepository::getInstance();
-
-    $registerEventUseCase = new RegisterEventUseCase();
-    $data = new RegisterEventUseCaseDTO;
-
-    $data->type = Type::DEPOSIT->toString();
-    $data->destination = 7;
-    $data->amount = 100;
-
-    $registerEventUseCase->execute($data);
-
-    echo "accounts ";
-    var_export($accountsRepository->accounts);
-    echo "<br>";
-    var_export($eventsRepository->events);
-    exit;
+  
 
     return $router->app->version();
 });

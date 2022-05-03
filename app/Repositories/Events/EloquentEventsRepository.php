@@ -16,11 +16,11 @@ class EloquentEventsRepository implements IEventsRepository {
 
     public function findById(int|string $id): array
     {
-        return $this->eventModel->where('id', $id)->get();
+        return $this->eventModel->where('id', $id)->get()->toArray();
     }
 
     public function create(array $data): void {
-        $this->eventModel->create($data);
+        $this->eventModel->create($data)->toArray();
     }
 
   

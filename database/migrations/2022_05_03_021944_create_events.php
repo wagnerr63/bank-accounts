@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('events', function (Blueprint $table) {
             $table->string('id')->primary();
+            $table->string('type');
             $table->string('origin')->default("");
             $table->string('destination')->default("");
             $table->integer('amount')->default(0);

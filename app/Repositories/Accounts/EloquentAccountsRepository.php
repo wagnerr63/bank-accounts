@@ -16,12 +16,12 @@ class EloquentAccountsRepository implements IAccountsRepository {
 
     public function findById(int|string $id): array
     {
-        return $this->accountModel->where('id', $id)->get();
+        return $this->accountModel->where('id', $id)->get()->toArray();
     }
 
     public function findByNumber(int|string $number): array
-    {
-        return $this->accountModel->where('number', $number)->get();
+    {   
+        return $this->accountModel->where('number', $number)->get()->toArray();
     }
 
     public function create(array $data): void {
@@ -30,6 +30,6 @@ class EloquentAccountsRepository implements IAccountsRepository {
 
     public function getBalanceByNumber(int|string $number): int
     {
-        return $this->accountModel->where('number', $number)->get('balance');
+        return $this->accountModel->where('number', $number)->get('balance')->toArray();
     }
 }
