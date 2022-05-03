@@ -1,24 +1,67 @@
-# Lumen PHP Framework
+--
+# Reset state before starting tests
 
-[![Build Status](https://travis-ci.org/laravel/lumen-framework.svg)](https://travis-ci.org/laravel/lumen-framework)
-[![Total Downloads](https://img.shields.io/packagist/dt/laravel/lumen-framework)](https://packagist.org/packages/laravel/lumen-framework)
-[![Latest Stable Version](https://img.shields.io/packagist/v/laravel/lumen-framework)](https://packagist.org/packages/laravel/lumen-framework)
-[![License](https://img.shields.io/packagist/l/laravel/lumen)](https://packagist.org/packages/laravel/lumen-framework)
+POST /reset
 
-Laravel Lumen is a stunningly fast PHP micro-framework for building web applications with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Lumen attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as routing, database abstraction, queueing, and caching.
+200 OK
 
-## Official Documentation
 
-Documentation for the framework can be found on the [Lumen website](https://lumen.laravel.com/docs).
+--
+# Get balance for non-existing account - DONE
 
-## Contributing
+GET /balance?account_id=1234
 
-Thank you for considering contributing to Lumen! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+404 0
 
-## Security Vulnerabilities
 
-If you discover a security vulnerability within Lumen, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
+--
+# Create account with initial balance - DONE
 
-## License
+POST /event {"type":"deposit", "destination":"100", "amount":10}
 
-The Lumen framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+201 {"destination": {"id":"100", "balance":10}}
+
+
+--
+# Deposit into existing account - DONE
+
+POST /event {"type":"deposit", "destination":"100", "amount":10}
+
+201 {"destination": {"id":"100", "balance":20}}
+
+
+--
+# Get balance for existing account
+
+GET /balance?account_id=100
+
+200 20
+
+--
+# Withdraw from non-existing account
+
+POST /event {"type":"withdraw", "origin":"200", "amount":10}
+
+404 0
+
+--
+# Withdraw from existing account
+
+POST /event {"type":"withdraw", "origin":"100", "amount":5}
+
+201 {"origin": {"id":"100", "balance":15}}
+
+--
+# Transfer from existing account
+
+POST /event {"type":"transfer", "origin":"100", "amount":15, "destination":"300"}
+
+201 {"origin": {"id":"100", "balance":0}, "destination": {"id":"300", "balance":15}}
+
+--
+# Transfer from non-existing account
+
+POST /event {"type":"transfer", "origin":"200", "amount":15, "destination":"300"}
+
+404 0
+

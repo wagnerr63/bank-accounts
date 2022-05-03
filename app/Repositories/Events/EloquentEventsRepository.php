@@ -16,7 +16,7 @@ class EloquentEventsRepository implements IEventsRepository {
 
     public function findById(int|string $id): array
     {
-        return $this->eventModel->where('id', $id)->get()->toArray();
+        return $this->eventModel->where('id', $id)->get()->first()->toArray();
     }
 
     public function create(array $data): void {

@@ -33,7 +33,7 @@ class RegisterEventUseCase {
         $this->accountsRepository = $accountsRepository ? $accountsRepository : new EloquentAccountsRepository;
     }
 
-    public function execute(RegisterEventUseCaseDTO $data): void {
+    public function execute(RegisterEventUseCaseDTO $data): array {
         switch ($data->type) {
             case Type::DEPOSIT->toString():
 
@@ -62,6 +62,23 @@ class RegisterEventUseCase {
                     $this->eventsRepository->create((array) $event);
 
                     // TODO - return the updated state of account
+                } else {
+                    $event = new Event();
+                    $event->type = $data->type;
+                    $event->destination = $data->destination;
+                    $event->amount = $data->amount;
+
+                    $this->eventsRepository->create((array) $event);
+
+                    $newBalance = (int) $accountByNumber['balance'] + $data->amount;
+                    $this->accountsRepository->update(['id' => $accountByNumber['id'], 'balance' => $newBalance]);
+
+                    return ['destination' => [
+                        'id' => $data->destination,
+                        'balance' => $newBalance
+                        ]
+                    ];
+                    
                 }
             break;
 

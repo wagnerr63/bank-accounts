@@ -29,12 +29,8 @@ class RegisterEventController extends Controller
 
         try {
 
-            $registerEventUseCase->execute($data);
-            return ['destination' => [
-                'id' => $data->destination,
-                'balance' => $data->amount
-                ]
-            ];
+            $response = $registerEventUseCase->execute($data);
+            return $response;
 
         } catch (\Exception $e) {
             return response($e->getMessage(), 400);
