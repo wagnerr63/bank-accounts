@@ -12,7 +12,7 @@ use App\Repositories\Events\EloquentEventsRepository;
 use App\Repositories\Events\IEventsRepository;
 use Exception;
 
-class RegisterEventUseCaseDTO {
+class RegisterEventUsecaseDTO {
     public string $type = "";
     public string $destination = "";
     public string $origin = "";
@@ -20,7 +20,7 @@ class RegisterEventUseCaseDTO {
 }
 
 
-class RegisterEventUseCase {
+class RegisterEventUsecase {
     private IEventsRepository $eventsRepository;
     private IAccountsRepository $accountsRepository;
 
@@ -33,7 +33,7 @@ class RegisterEventUseCase {
         $this->accountsRepository = $accountsRepository ? $accountsRepository : new EloquentAccountsRepository;
     }
 
-    public function execute(RegisterEventUseCaseDTO $data): array {
+    public function execute(RegisterEventUsecaseDTO $data): array {
         switch ($data->type) {
             case Type::DEPOSIT->toString():
 

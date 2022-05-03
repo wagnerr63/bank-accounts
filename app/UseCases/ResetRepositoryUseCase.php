@@ -7,7 +7,7 @@ use App\Repositories\Accounts\IAccountsRepository;
 use App\Repositories\Events\EloquentEventsRepository;
 use App\Repositories\Events\IEventsRepository;
 
-class ResetRepositoryUseCase {
+class ResetRepositoryUsecase {
     private IAccountsRepository $accountsRepository;
     private IEventsRepository $eventsRepository;
 

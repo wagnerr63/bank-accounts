@@ -7,7 +7,7 @@ use App\Repositories\Accounts\IAccountsRepository;
 use App\Repositories\Accounts\MockAccountsRepository;
 use Exception;
 
-class GetAccountByNumberUseCase {
+class GetAccountByNumberUsecase {
     private IAccountsRepository $accountsRepository;
 
     public function __construct(IAccountsRepository $accountsRepository = null)
