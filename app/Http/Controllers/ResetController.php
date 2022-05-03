@@ -15,7 +15,7 @@ class ResetController extends Controller {
         $resetRepositoryUsecase = new ResetRepositoryUsecase();
         try {
             $resetRepositoryUsecase->execute();
-            return response(0, 200);
+            return response('OK', 200);
         } catch (\Exception $e) {
             return response(0, 400);
         }
