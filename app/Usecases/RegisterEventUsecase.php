@@ -112,7 +112,45 @@ class RegisterEventUsecase {
             break;
 
             case Type::TRANSFER->toString():
-                # code...
+                $accountOriginByNumber = $this->accountsRepository->findByNumber($data->origin);
+                $accountDestinationByNumber = $this->accountsRepository->findByNumber($data->destination);
+
+                if (!isset($accountOriginByNumber['id'])) {
+                    throw new Exception(0);
+                }
+
+                if (!isset($accountDestinationByNumber['id'])) {
+                    $newAccount = new Account;
+                    $newAccount->number = $data->destination;
+                    $this->accountsRepository->create((array) $newAccount);
+                    $accountDestinationByNumber = $this->accountsRepository->findByNumber($data->destination);
+                }
+
+                $event = new Event();
+                $event->type = $data->type;
+                $event->amount = $data->amount;
+                $event->origin = $data->origin;
+                $event->destination = $data->destination;
+
+                $this->eventsRepository->create((array) $event);
+
+                $newAccountOriginBalance = (int) $accountOriginByNumber['balance'] - $data->amount;
+                $newAccountDestinationBalance = (int) $accountDestinationByNumber['balance'] + $data->amount;
+
+                $this->accountsRepository->update(['id' => $accountOriginByNumber['id'], 'balance' => $newAccountOriginBalance]);
+                $this->accountsRepository->update(['id' => $accountDestinationByNumber['id'], 'balance' => $newAccountDestinationBalance]);
+
+                return [
+                    "origin" => [
+                        "id" => $accountOriginByNumber['number'], 
+                        "balance" => $newAccountOriginBalance
+                    ],
+                    "destination" => [
+                        "id" => $accountDestinationByNumber['number'], 
+                        "balance" => $newAccountDestinationBalance
+                    ]
+                ];
+
             break;
             
             default:
