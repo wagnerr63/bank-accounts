@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Usecases\GetAccountByNumberUseCase;
+use App\Usecases\GetAccountByNumberUsecase;
 use Illuminate\Http\Request;
 
 class GetBalanceByNumberController extends Controller
@@ -11,7 +11,7 @@ class GetBalanceByNumberController extends Controller
         $number = $request->input('account_id');
 
         try {
-            $getAccountByNumber = new GetAccountByNumberUseCase();
+            $getAccountByNumber = new GetAccountByNumberUsecase();
             $account = $getAccountByNumber->execute($number);
 
             return response($account['balance'], 200);

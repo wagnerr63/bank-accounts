@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Usecases\RegisterEventUseCase;
-use App\Usecases\RegisterEventUseCaseDTO;
+use App\Usecases\RegisterEventUsecase;
+use App\Usecases\RegisterEventUsecaseDTO;
 use Illuminate\Http\Request;
 
 class RegisterEventController extends Controller
@@ -19,8 +19,8 @@ class RegisterEventController extends Controller
     }
 
     public function handle(Request $request) {
-        $registerEventUseCase = new RegisterEventUseCase();
-        $data = new RegisterEventUseCaseDTO;
+        $registerEventUsecase = new RegisterEventUsecase();
+        $data = new RegisterEventUsecaseDTO;
        
         $data->type = $request->json('type') ? $request->json('type') : "";
         $data->origin = $request->json('origin') ? $request->json('origin') : "";
@@ -29,7 +29,7 @@ class RegisterEventController extends Controller
 
         try {
 
-            $response = $registerEventUseCase->execute($data);
+            $response = $registerEventUsecase->execute($data);
             return response($response, 201);
 
         } catch (\Exception $e) {

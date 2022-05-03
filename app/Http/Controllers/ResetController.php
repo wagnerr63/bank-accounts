@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Usecases\ResetRepositoryUseCase;
+use App\Usecases\ResetRepositoryUsecase;
 use Illuminate\Http\Request;
 
 class ResetController extends Controller {
@@ -12,9 +12,9 @@ class ResetController extends Controller {
     }
 
     public function handle(Request $request) {
-        $resetRepositoryUseCase = new ResetRepositoryUseCase();
+        $resetRepositoryUsecase = new ResetRepositoryUsecase();
         try {
-            $resetRepositoryUseCase->execute();
+            $resetRepositoryUsecase->execute();
             return response(0, 200);
         } catch (\Exception $e) {
             return response(0, 400);
