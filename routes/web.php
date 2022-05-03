@@ -1,8 +1,5 @@
 <?php
 
-use App\Entities\Account;
-use App\Repositories\Accounts\EloquentAccountsRepository;
-
 /** @var \Laravel\Lumen\Routing\Router $router */
 
 /*

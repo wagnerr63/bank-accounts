@@ -87,7 +87,28 @@ class RegisterEventUsecase {
             break;
 
             case Type::WITHDRAW->toString():
-                # code...
+                $accountByNumber = $this->accountsRepository->findByNumber($data->origin);
+                
+                if (!isset($accountByNumber['id'])) {
+                    throw new Exception(0);
+                }
+
+                $event = new Event();
+                $event->amount = $data->amount;
+                $event->origin = $data->origin;
+                $event->type = $data->type;
+
+                $this->eventsRepository->create((array) $event);
+                
+                $newBalance = (int) $accountByNumber['balance'] - $data->amount;
+                $this->accountsRepository->update(['id' => $accountByNumber['id'], 'balance' => $newBalance]);
+
+                return [
+                    "origin" => [
+                        "id" => $accountByNumber['number'],
+                        "balance" => $newBalance,
+                    ]
+                ];
             break;
 
             case Type::TRANSFER->toString():

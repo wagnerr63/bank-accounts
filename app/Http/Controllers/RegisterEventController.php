@@ -33,7 +33,7 @@ class RegisterEventController extends Controller
             return response($response, 201);
 
         } catch (\Exception $e) {
-            return response($e->getMessage(), 400);
+            return response($e->getMessage(), 404);
         }
     }
 }
