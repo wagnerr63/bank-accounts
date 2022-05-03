@@ -23,5 +23,8 @@ class EloquentEventsRepository implements IEventsRepository {
         $this->eventModel->create($data)->toArray();
     }
 
-  
+    public function reset(): void
+    {
+        $this->eventModel->where("id", "!=", "")->delete();
+    }
 }

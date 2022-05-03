@@ -17,10 +17,11 @@ use App\Repositories\Accounts\EloquentAccountsRepository;
 */
 
 $router->get('/', function () use ($router) {
-  
 
     return $router->app->version();
 });
+
+$router->post('/reset', 'ResetController@handle');
 
 $router->get('/balance', 'GetBalanceByNumberController@handle');
 

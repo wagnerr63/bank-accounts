@@ -37,4 +37,9 @@ class EloquentAccountsRepository implements IAccountsRepository {
     {   
         $this->accountModel->where(['id' => $data['id']])->update($data);
     }
+
+    public function reset(): void
+    {
+        $this->accountModel->where("id", "!=", "")->delete();
+    }
 }

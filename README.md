@@ -1,5 +1,5 @@
 --
-# Reset state before starting tests
+# Reset state before starting tests - DONE
 
 POST /reset
 
