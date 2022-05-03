@@ -5,7 +5,7 @@ namespace App\Repositories\Events;
 use App\Repositories\Events\IEventsRepository;
 use App\Models\Event;
 
-class EloquentAccountsRepository implements IEventsRepository {
+class EloquentEventsRepository implements IEventsRepository {
 
     private Event $eventModel;
 
