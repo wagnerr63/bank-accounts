@@ -1,5 +1,7 @@
+# Bank Accounts API
+
 --
-# Reset state before starting tests - DONE
+# Reset state before starting tests
 
 POST /reset
 
@@ -7,7 +9,7 @@ POST /reset
 
 
 --
-# Get balance for non-existing account - DONE
+# Get balance for non-existing account
 
 GET /balance?account_id=1234
 
@@ -15,7 +17,7 @@ GET /balance?account_id=1234
 
 
 --
-# Create account with initial balance - DONE
+# Create account with initial balance
 
 POST /event {"type":"deposit", "destination":"100", "amount":10}
 
@@ -23,7 +25,7 @@ POST /event {"type":"deposit", "destination":"100", "amount":10}
 
 
 --
-# Deposit into existing account - DONE
+# Deposit into existing account
 
 POST /event {"type":"deposit", "destination":"100", "amount":10}
 
@@ -31,35 +33,35 @@ POST /event {"type":"deposit", "destination":"100", "amount":10}
 
 
 --
-# Get balance for existing account - DONE
+# Get balance for existing account
 
 GET /balance?account_id=100
 
 200 20
 
 --
-# Withdraw from non-existing account - DONE
+# Withdraw from non-existing account
 
 POST /event {"type":"withdraw", "origin":"200", "amount":10}
 
 404 0
 
 --
-# Withdraw from existing account - DONE
+# Withdraw from existing account
 
 POST /event {"type":"withdraw", "origin":"100", "amount":5}
 
 201 {"origin": {"id":"100", "balance":15}}
 
 --
-# Transfer from existing account - DONE
+# Transfer from existing account
 
 POST /event {"type":"transfer", "origin":"100", "amount":15, "destination":"300"}
 
 201 {"origin": {"id":"100", "balance":0}, "destination": {"id":"300", "balance":15}}
 
 --
-# Transfer from non-existing account - DONE
+# Transfer from non-existing account
 
 POST /event {"type":"transfer", "origin":"200", "amount":15, "destination":"300"}
 
