@@ -1,6 +1,17 @@
 # Bank Accounts API
-API with Lumen
---
+
+## Description
+API with Lumen that simulates bank transactions
+
+## Requirements
+- PHP
+- Composer
+- MySQL
+
+## How to setup and run the project
+- Run the command `composer install` to install the dependencies
+- With your MySQL database seted up and running, run `php artisan migrate` to create the database tables
+- Run `php -S localhost:8000 -t public` to serve the API and done!
 
 # Routes
 ## Reset state before starting tests
