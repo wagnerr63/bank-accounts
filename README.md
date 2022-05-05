@@ -4,12 +4,14 @@
 API with Lumen that simulates bank transactions
 
 ## Requirements
-- PHP
+- PHP 8
 - Composer
-- MySQL
+- Docker
 
 ## How to setup and run the project
 - Run the command `composer install` to install the dependencies
+- Run `docker-compose up -d` to set up the database
+- Copy the .env.example file and create a .env
 - With your MySQL database seted up and running, run `php artisan migrate` to create the database tables
 - Run `php -S localhost:8000 -t public` to serve the API and done!
 
