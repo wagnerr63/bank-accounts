@@ -15,6 +15,9 @@ API with Lumen that simulates bank transactions
 - With your MySQL database seted up and running, run `php artisan migrate` to create the database tables
 - Run `php -S localhost:8000 -t public` to serve the API and done!
 
+# Tests
+- Run `vendor/bin/phpunit`
+
 # Routes
 ## Reset state before starting tests
 

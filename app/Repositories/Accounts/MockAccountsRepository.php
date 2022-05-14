@@ -3,11 +3,12 @@
 namespace App\Repositories\Accounts;
 
 use App\Repositories\Accounts\IAccountsRepository;
+use Exception;
 
 class MockAccountsRepository implements IAccountsRepository {
     private static $instance;
     public array $accounts;
-    
+
 
     public function __construct()
     {
@@ -51,6 +52,10 @@ class MockAccountsRepository implements IAccountsRepository {
             return 0;
         }
         return $this->accounts[$index]['balance'];
+    }
+
+    public function update(array $data): void {
+        throw new Exception("not implemented");
     }
 
     public function reset(): void {
