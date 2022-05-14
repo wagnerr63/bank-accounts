@@ -4,7 +4,7 @@
 API with Lumen that simulates bank transactions
 
 ## Requirements
-- PHP 8
+- PHP 8.1
 - Composer
 - Docker
 
