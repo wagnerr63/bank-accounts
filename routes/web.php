@@ -14,7 +14,7 @@
 */
 
 $router->get('/', function () use ($router) {
-
+    var_export('test  heroku');
     return $router->app->version();
 });
 
